@@ -6,7 +6,7 @@ import javax.swing.table.DefaultTableModel;
 public class ShoppingCartUI
     extends JFrame
     implements Observer {
-
+    private JPanel salePnl = new JPanel();
     ShoppingCartUI() {
     }
 
@@ -16,6 +16,8 @@ public class ShoppingCartUI
         setSize(500, 500);
         setLayout(null);
 
+        salePnl.setLayout(null);
+        salePnl.removeAll();
         int
             d = 20,
             spL = 40,
@@ -43,14 +45,16 @@ public class ShoppingCartUI
         JScrollPane scrollPane = new JScrollPane(booksTable);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setBounds(spL, d, spW, spH);
-        add(scrollPane);
+        salePnl.add(scrollPane);
 
         JLabel totalLbl = new JLabel(
             String.format("总价：%.2f元", sale.getTotal())
         );
         totalLbl.setBounds(spL + w + d, spH + d * 2, w, h);
-        add(totalLbl);
+        salePnl.add(totalLbl);
 
+        setContentPane(salePnl);
+        salePnl.revalidate();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
